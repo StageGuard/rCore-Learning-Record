@@ -46,11 +46,11 @@ ACTIVE (+BOOTLOADER), DFU 和 BOOTLOADER_STATE 分区可能会分离到不同的
 
 此引导加载程序有一个平台无关的部分，这部分实现了断电保护的交换算法，该算法的交换边界由分区提供。平台相关的部分是少量的附加代码，提供了例如看门狗（watchdogs）或者支持 nRF52 软设备的额外实现。
 
-`FirmwareUpdater`
+## `FirmwareUpdater`
 
 `FirmwareUpdater` 是一个方便把固件刷入 DFU 分区随后让固件准备好在下一次设备重置的时候交换到 ACTIVE 分区的对象。主要方法是 `write_firmware`，每一个 写块（通常是 4KiB）大小调用一次，全部写入完成后再调用 `mark_updated` 方法。
 
-`验证`
+## `验证`
 
 此引导加载程序支持验证已刷入 DFU 分区的固件。验证要求使用 [ed25519](https://ed25519.cr.yp.to/) 签名对固件进行数字签名。如果验证功能启用，则需要使用 `FirmwareUpdater::verify_and_mark_updated` 来代替上面的 `mark_updated` 方法。该方法需要公钥和签名，以及已闪存的固件的实际长度。如果验证失败那刷入的固件就不会被标记为已更新，因此更新会被拒绝。
 
