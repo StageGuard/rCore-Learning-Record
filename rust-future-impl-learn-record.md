@@ -1,3 +1,5 @@
+> 原文链接：https://github.com/verhovsky/books-futures-explained
+
 ## Rust Fat Pointer
 
 Rust 的一些指针，例如 `&[T]` 或者 `&dyn Trait` 他们是胖指针，胖指针包含了指向对象的指针 `*mut T / *const T` 和它对应的 `vtables` 指针。虚表里包含了函数方法指针和 Drop 指针。
